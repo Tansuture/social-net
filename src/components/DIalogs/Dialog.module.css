@@ -1,0 +1,21 @@
+.dialogs{
+display: grid;
+grid-template-columns: 3fr 10fr;
+}
+.dialog{
+
+}
+.button{
+    width: 200px;
+}
+.messages{
+padding: 10px;
+}
+.image{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+.dialogsItem{
+    padding: 10px; 
+}

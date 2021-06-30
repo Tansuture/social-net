@@ -1,0 +1,21 @@
+.nav{
+    grid-area : nav;
+    background-color: bisque;
+
+  }
+
+  .link{
+    color:black;
+    
+ 
+  }
+  .active {
+  color:gold;
+  }
+  .nav ul{
+    list-style: none;
+  }
+  
+  .nav li a {
+    text-decoration: none;
+  }
