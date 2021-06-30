@@ -1,7 +1,6 @@
 
 import MyPosts from "./MyPosts/MyPosts"
 import React from 'react'
-import { addNewPostActionCreator, updateNewPostTextActionCreator } from "../../../state/profileReducer"
 
 
 const Post=(props)=>{
@@ -9,19 +8,19 @@ const Post=(props)=>{
     let postElements = props.postData.map(p => <MyPosts message={p.message} LikesCount ={p.LikesCount}/>)
 
 
-    let addPost=()=>{
-        props.dispatch(addNewPostActionCreator()) // отправить данные на  стэйт жс
+    let onAddPost=()=>{
+        props.addPost()
     }
 
-    let postChange=(e)=>{
+    let onPostChange=(e)=>{
         
        let text= e.target.value
-       props.dispatch(updateNewPostTextActionCreator(text)) 
+       props.updateNewPostText(text)
     }
     return(
         <div>
-            <textarea   value = {props.newPostText} onChange={postChange}></textarea>
-            <button onClick ={addPost}>Add</button>
+            <textarea   value = {props.newPostText} onChange={onPostChange}></textarea>
+            <button onClick ={onAddPost}>Add</button>
             <div> {postElements}</div>
           
         </div>

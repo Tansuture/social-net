@@ -2,11 +2,10 @@ import s from './Dialog.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import Messages from './MessageItem/MessageItem'
 import React from 'react'
-import { sendMessageActionCreator, updateNewMessageTextActionCreator } from '../../state/dialogsReducer'
 
 const Dialogs = (props) => {
     
-    let state = props.store.getState().dialogsPage
+    let state = props.dialogsPage
     //компоненты
     let dialogElem = state.dialogData.map(dialog => <DialogItem name={dialog.name} image={dialog.image} id={dialog.id}/>)
     let messageElem = state.messageData.map(mess => <Messages message={mess.message}/>)
@@ -15,15 +14,14 @@ const Dialogs = (props) => {
     let newMessageText = state.newMessageText
 
 
-    let changeValue = (e)=>{
+    let onChangeValue = (e)=>{
         let message = e.target.value
-        props.store.dispatch(updateNewMessageTextActionCreator(message))
+        props.changeValue(message)
     }
 
-    let addMessage = () => {
-     props.store.dispatch(sendMessageActionCreator())
+    let onAddMessage = () => {
+     props.addMessage()
     }
-
     
     return (
         <div className={s.dialogs}>
@@ -33,10 +31,11 @@ const Dialogs = (props) => {
             <div className={s.messages}>
                 {messageElem}
             </div>
-            <textarea value={newMessageText} onChange = {changeValue}></textarea>
-            <button onClick={addMessage} className={s.button}>ADD POST</button>
+            <textarea value={newMessageText} onChange = {onChangeValue}></textarea>
+            <button onClick={onAddMessage} className={s.button}>ADD POST</button>
         </div>
 
     )
 }
+
 export default Dialogs
