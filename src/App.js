@@ -19,8 +19,8 @@ return (
    <Header/>
    <Navbar/>
    <div className = "app-wrapper-container">
-  <Route path = "/messages" render = {()=><DialogsContainer store={props.store}/>} />
-  <Route  path ="/profile"  render = {()=><Profile    store={props.store} />} /> 
+  <Route path = "/messages" render = {()=><DialogsContainer />} />
+  <Route  path ="/profile"  render = {()=><Profile />} /> 
   <Route  path ="/news"  render = {()=><Music/>}/>
   <Route  path ="/music"  render = {()=><News/>}/> 
   <Route path ="/settings"  render = {()=><Settings/>}/>
