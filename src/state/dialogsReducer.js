@@ -44,14 +44,17 @@ const dialogsReducer = (state=initialState,action) =>{
 
     switch(action.type){
         case UPDATE_NEW_MESSAGE :
-        state.newMessageText = action.newMessage //здесь значение из инпут
-        return state
-        case SEND_MESSAGE:
+        return {...state,
+        newMessageText:action.newMessage} //здесь значение из инпут
+        
+        case SEND_MESSAGE:{
         let message = state.newMessageText //Значение из инпута
-    
-        state.messageData.push({id:6,message:message}) // запушение нового сообщения в массив данных
-        message = " "
-        return state
+        return {...state, //копирование стэйта в новый объект
+        newMessageText: '', //очищение инпута
+        messageData:[...state.messageData,{id:6,message:message}] //запушение новых данных
+        }
+    }
+      
         default : return state
        
     }

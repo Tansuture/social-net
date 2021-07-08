@@ -18,7 +18,8 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     return {
         postData: state.profilePage.postData, 
-        newPostText: state.profilePage.newPostText}
+        newPostText: state.profilePage.newPostText
+    }
 }
 const PostContainer = connect(mapStateToProps,mapDispatchToProps)(Post)
 

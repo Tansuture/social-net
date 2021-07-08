@@ -9,6 +9,9 @@ import Navbar from './components/Navbar/navbar';
 import News from './components/News/News';
 import Profile from './components/Profile/Profile';
 import Settings from './components/Settings/Setting';
+import UsersContainer from './components/User/UsersContainer';
+
+
 
 
 const App=(props)=>{
@@ -24,6 +27,8 @@ return (
   <Route  path ="/news"  render = {()=><Music/>}/>
   <Route  path ="/music"  render = {()=><News/>}/> 
   <Route path ="/settings"  render = {()=><Settings/>}/>
+  <Route path ="/users" render ={()=><UsersContainer/>}/>
+
    </div>
   
   </div>

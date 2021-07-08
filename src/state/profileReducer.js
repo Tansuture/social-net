@@ -1,6 +1,6 @@
 const ADD_POST = "ADD_POST"
 const UPDATE_NEW_POST = "UPDATE_NEW_POST"
-let initialState =  {
+let initialState = {
     postData: [
         {
             id: 1,
@@ -12,7 +12,7 @@ let initialState =  {
             LikesCount: 46
         }
     ],
-    newPostText:"Tansu Hello"
+    newPostText: "Tansu Hello"
 }
 const profileReducer = (state = initialState, action) => {
 
@@ -23,26 +23,26 @@ const profileReducer = (state = initialState, action) => {
                 message: state.newPostText,
                 LikesCount: 0
             }
-            state.postData.push(newPost)
-             state.newPostText = " "
-            return state
+            return {...state, //копирование стэйта в новый объект
+                newPostText: '', //очистка инпута
+                postData: [  ...state.postData,newPost ] // копирование постдата со старого стэйта и запушение новых данных
+            }
 
         case UPDATE_NEW_POST:
-            state.newPostText = action.newText
+            {
+                let copyState = {  ...state }
+
+                copyState.newPostText = action.newText
+                return copyState
+            }
+        default:
             return state
-        default : return state
 
     }
 
-
 }
 
-export const addNewPostActionCreator = () =>({
-    type:ADD_POST
-})
+export const addNewPostActionCreator = () => ({type: ADD_POST})
 
-export const updateNewPostTextActionCreator = (text) =>({
-    type:UPDATE_NEW_POST,
-    newText:text
-})
+export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST, newText: text})
 export default profileReducer
