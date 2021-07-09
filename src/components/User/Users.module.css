@@ -29,3 +29,30 @@
     padding: 10px;
     width: 50%;
 }
+.pagination {
+    display: inline-block;
+  }
+
+  .pagination li {
+   list-style: none;
+   display: inline;
+  }
+  .pagination li  a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+  }
+
+  .active{
+    background-color: #20B2AA;
+    color: white;
+    border: 1px solid #20B2AA;
+  }
+
+  .pagination li a:hover:not(.active) {background-color: #ddd;}
+
+  
+  
