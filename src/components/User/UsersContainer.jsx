@@ -1,37 +1,25 @@
 import { connect } from "react-redux"
-import { followActionCreator, setCurrPageCreator, setTotalCountCreator, setUsersCreator, unfollowActionCreator } from "../../state/usersReducer"
-import Users from "./Users"
+import { follow, setCurrPage, setLoading, setTotalCount, setUsers, unfollow} from "../../state/usersReducer"
+import UsersApi from "./UsersApi"
 
 
-const mapDispatchToProps =(dispatch)=>{
-    return{
-        follow:(userId)=>{
-            dispatch(followActionCreator(userId))
-        },
-        unfollow:(userId)=>{
-            dispatch(unfollowActionCreator(userId))
-        },
-        setUsers :(users)=>{
-            dispatch(setUsersCreator(users))
-        },
-        setCurrPage: (page)=>{
-            dispatch(setCurrPageCreator(page))
-        },
-        setTotalCount:(totalCount)=>{
-            dispatch(setTotalCountCreator(totalCount))
-        }
-
-    }
-}
 
 const mapStateToProps=(state)=>{
     return{
         users:state.usersPage.users,
         postsPerPage:state.usersPage.postsPerPage,
         totalCount:state.usersPage.totalCount,
-        currentPage:state.usersPage.currentPage
+        currentPage:state.usersPage.currentPage,
+        isLoading:state.usersPage.isLoading
     }
 }
 
-const UsersContainer = connect(mapStateToProps,mapDispatchToProps)(Users)
+const UsersContainer = connect(mapStateToProps,{
+    follow,
+    unfollow,
+    setCurrPage,
+    setLoading, 
+    setTotalCount,
+     setUsers
+})(UsersApi)
 export default UsersContainer

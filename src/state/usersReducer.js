@@ -3,11 +3,14 @@ const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
 const SET_TOTAL_COUNT="SET_TOTAL_COUNT"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
+const SET_LOADING = "SET_LOADING"
+
 const initialState = {
     users: [],
     postsPerPage:10,
     totalCount:0,
-    currentPage:2
+    currentPage:2,
+    isLoading:false
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -65,6 +68,16 @@ const usersReducer = (state = initialState, action) => {
                         totalCount: action.totalCount
                     }
                 }
+                case SET_LOADING:
+          
+                    {
+                     
+                        return {
+                            
+                            ...state,
+                            isLoading: action.isLoading
+                        }
+                    }
     
         default:
             return state
@@ -72,10 +85,12 @@ const usersReducer = (state = initialState, action) => {
 
 }
 
-export const unfollowActionCreator = (userId) => ({type: UNFOLLOW, userId})
-export const followActionCreator = (userId) => ({type: FOLLOW, userId})
-export const setUsersCreator = (users) => ({type: SET_USERS,users})
-export const setCurrPageCreator=(page)=> ({type:SET_CURRENT_PAGE,page})
-export const setTotalCountCreator=(totalCount)=>({type:SET_TOTAL_COUNT,totalCount})
+//ACTION CREATORS
+export const unfollow = (userId) => ({type: UNFOLLOW, userId})
+export const follow = (userId) => ({type: FOLLOW, userId})
+export const setUsers = (users) => ({type: SET_USERS,users})
+export const setCurrPage=(page)=> ({type:SET_CURRENT_PAGE,page})
+export const setTotalCount=(totalCount)=>({type:SET_TOTAL_COUNT,totalCount})
+export const setLoading=(isLoading)=>({type:SET_LOADING,isLoading})
 
 export default usersReducer
