@@ -51,7 +51,7 @@ const dialogsReducer = (state=initialState,action) =>{
         let message = state.newMessageText //Значение из инпута
         return {...state, //копирование стэйта в новый объект
         newMessageText: '', //очищение инпута
-        messageData:[...state.messageData,{id:6,message:message}] //запушение новых данных
+        messageData:{id:6,message:message}//запушение новых данных
         }
     }
       

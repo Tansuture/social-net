@@ -10,7 +10,7 @@ const Users = ({users,follow,unfollow,postsPerPage,totalCount,currentPage,change
     for(let i=1;i<=Math.ceil(totalCount/postsPerPage);i++){
         pageNumbers.push(i)
     }
-
+ 
     return(
         <>
         {isLoading ? (
@@ -25,7 +25,7 @@ const Users = ({users,follow,unfollow,postsPerPage,totalCount,currentPage,change
         <div>
     {users.map(u=><div> 
         <div className={s.user_block}>
-           <NavLink to={`/profile/${u.id}`}> <img src={user} className={s.img}/></NavLink>
+           <NavLink to={`/profile/${u.id}`}> <img src={u.photos.small !=null ? u.photos.small:user } className={s.img}/></NavLink>
             <div className={s.info}>
                 <p>{u.name}</p>
                 <p>{'u.location.city'},{'u.location.country'}</p>

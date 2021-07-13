@@ -7,3 +7,10 @@
   .header img{
     width: 100px;
   }
+
+  .auth_block{
+    float:right
+  }
+  .auth_block a {
+    color:white;
+  }

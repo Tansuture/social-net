@@ -16,7 +16,7 @@ const initialState = {
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case FOLLOW:
-            {
+            
                 return {
                     ...state,users: state.users.map(u => {
                             if (u.id === action.userId) 
@@ -26,9 +26,9 @@ const usersReducer = (state = initialState, action) => {
                             return u
                         })
                 }
-            }
+            
         case UNFOLLOW:
-            {
+            
                 return {
                     ...state,
                     users: state.users.map(u => {
@@ -37,17 +37,17 @@ const usersReducer = (state = initialState, action) => {
                             return u
                         })
                 }
-            }
+            
         case SET_USERS:
           
-            {
+            
              
                 return {
                     
                     ...state,
                     users:action.users
                 }
-            }
+            
             case SET_CURRENT_PAGE:
           
                 {
