@@ -13,7 +13,7 @@
     margin:2px auto 5px 20%;
   
 }
-.btn{
+/* .btn{
     appearance: none;
     border: 0;
     border-radius: 5px;
@@ -21,7 +21,7 @@
     color: #fff;
     padding: 8px 16px;
     font-size: 16px;
-}
+} */
 .info{
     display: grid;
     grid-template-columns: 3fr 1fr;
@@ -55,4 +55,8 @@
   .pagination li a:hover:not(.active) {background-color: #ddd;}
 
   
-  
+  .btn:disabled{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }

@@ -4,7 +4,8 @@ import user from './assets/User.png'
 import Loader from 'react-loader-spinner'
 import { NavLink } from 'react-router-dom'
 
-const Users = ({users,follow,unfollow,postsPerPage,totalCount,currentPage,changePage,isLoading}) =>{
+
+const Users = ({users,isBtnToggled,setToggleBtn,follow,unfollow,postsPerPage,totalCount,currentPage,changePage,isLoading}) =>{
     let pageNumbers=[]
 
     for(let i=1;i<=Math.ceil(totalCount/postsPerPage);i++){
@@ -32,7 +33,10 @@ const Users = ({users,follow,unfollow,postsPerPage,totalCount,currentPage,change
                 <p>{u.status}</p>
              </div>
             <div className={s.btn_container}>
-            { u.followed ? <button className={s.btn} onClick={()=>{unfollow(u.id)}}>Unfollow</button>:<button className={s.btn} onClick={()=>{follow(u.id)}}>follow</button>}
+                { u.followed ? <button disabled={isBtnToggled.some(id=>id===u.id)}className={s.btn}
+                 onClick={()=>{unfollow(u.id)}}>Unfollow</button> :
+                 <button  disabled={isBtnToggled.some(id=>id===u.id)} className={s.btn}
+                  onClick={()=>{follow(u.id)}}>follow</button>}
             </div>   
          </div>
     </div>
