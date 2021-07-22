@@ -3,9 +3,10 @@
 import PostContainer from './Post/PostContainer'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 
-const Profile = (props) => {
-    
 
+const Profile = (props) => {
+ 
+    
     return (
    
         <div>

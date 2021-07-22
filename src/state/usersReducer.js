@@ -31,15 +31,16 @@ export const getUsersThunkCreator =(currentPage,postsPerPage)=>{
 }
 export const unfollowThunkCreator = (userId)=>{
     return (dispatch)=>{
+        
             dispatch(setToggleBtn(true,userId))
-            usersAPI.unfollowBtn(userId).then(data=>unfollow(userId))
+            usersAPI.unfollowBtn(userId).then(data=>dispatch(unfollow(userId)))
             dispatch(setToggleBtn(false,userId))
     }
 }
 export const followThunkCreator = (userId)=>{
     return (dispatch)=>{
             dispatch(setToggleBtn(true,userId))
-            usersAPI.followBtn(userId).then(data=>follow(userId))
+            usersAPI.followBtn(userId).then(data=>dispatch(follow(userId)))
             dispatch(setToggleBtn(false,userId))
     }
 }
@@ -103,7 +104,7 @@ const usersReducer = (state = initialState, action) => {
                             
                             ...state,
                             isBtnToggled: action.isLoading ? [...state.isBtnToggled,action.userId]: //добавление в массив айди
-                            state.isBtnToggled.filter(id=>id!=action.userId) 
+                            state.isBtnToggled.filter(id=>id!==action.userId) 
                         }
                     
     
@@ -120,6 +121,6 @@ export const setUsers = (users) => ({type: SET_USERS,users})
 export const setCurrPage=(page)=> ({type:SET_CURRENT_PAGE,page})
 export const setTotalCount=(totalCount)=>({type:SET_TOTAL_COUNT,totalCount})
 export const setLoading=(isLoading)=>({type:SET_LOADING,isLoading})
-export const setToggleBtn=(isLoading)=>({type:TOGGLE_BTN,isLoading})
+export const setToggleBtn=(isLoading,userId)=>({type:TOGGLE_BTN,isLoading,userId})
 
 export default usersReducer

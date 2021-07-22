@@ -5,7 +5,7 @@ let initialState = {
     dialogData: [
         {
             id: 1,
-            name: "Luke Skywoker",
+            name: "L.Skywoker",
             image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKGgKT9ghTPIREaTmXo2ZA30FxE2eVXT0naQ&usqp=CAU'
             
         }, {
@@ -14,7 +14,7 @@ let initialState = {
             image:'https://vokrug.tv/pic/news/4/d/e/9/4de9ff942cdc6a7f43d7de10bf151153.jpg'
         }, {
             id: 3,
-            name: "Han Solo",
+            name: "H.Solo",
             image:'https://upload.wikimedia.org/wikipedia/ru/thumb/e/eb/HanEndor.jpg/280px-HanEndor.jpg'
         }, {
             id: 4,
@@ -47,13 +47,13 @@ const dialogsReducer = (state=initialState,action) =>{
         return {...state,
         newMessageText:action.newMessage} //здесь значение из инпут
         
-        case SEND_MESSAGE:{
+        case SEND_MESSAGE:
         let message = state.newMessageText //Значение из инпута
         return {...state, //копирование стэйта в новый объект
         newMessageText: '', //очищение инпута
-        messageData:{id:6,message:message}//запушение новых данных
+        messageData:{id:6,message:message} //запушение новых данных
         }
-    }
+    
       
         default : return state
        

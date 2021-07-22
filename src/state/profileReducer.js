@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api"
+
 const ADD_POST = "ADD_POST"
 const UPDATE_NEW_POST = "UPDATE_NEW_POST"
 const SET_USER_PROFILE="SET_USER_PROFILE"
@@ -44,6 +46,12 @@ const profileReducer = (state = initialState, action) => {
 
     }
 
+}
+export const userProfileThunkCreator=(userId)=>{
+    return(dispatch)=>{
+       
+        usersAPI.setUserProfile(userId).then(data=>dispatch(setUserProfile(data)))
+    }
 }
 
 export const addNewPostActionCreator = () => ({type: ADD_POST})

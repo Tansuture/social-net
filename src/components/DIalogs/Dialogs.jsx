@@ -2,8 +2,12 @@ import s from './Dialog.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import Messages from './MessageItem/MessageItem'
 import React from 'react'
+import {Redirect} from "react-router-dom";
+
 
 const Dialogs = (props) => {
+    
+   
     
     let state = props.dialogsPage
     //компоненты
@@ -22,14 +26,14 @@ const Dialogs = (props) => {
     let onAddMessage = () => {
      props.addMessage()
     }
-    
+    if (!props.isAuth) return <Redirect to='/login' />
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
                 {dialogElem}
             </div>
             <div className={s.messages}>
-                {messageElem}
+                <div >{messageElem}</div>
             </div>
             <textarea value={newMessageText} onChange = {onChangeValue}></textarea>
             <button onClick={onAddMessage} className={s.button}>ADD POST</button>

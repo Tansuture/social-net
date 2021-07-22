@@ -1,6 +1,6 @@
 import {Component} from 'react'
 import { connect } from "react-redux"
-import {  getUsersThunkCreator, unfollowThunkCreator,followThunkCreator,setCurrPage,setToggleBtn, unfollow} from "../../state/usersReducer"
+import {  getUsersThunkCreator, unfollowThunkCreator,followThunkCreator,setCurrPage,setToggleBtn} from "../../state/usersReducer"
 import Users from "./Users"
 
 
@@ -51,5 +51,5 @@ const mapStateToProps=(state)=>{
     }
 }
 
-export default connect(mapStateToProps,{ follow:followThunkCreator,unfollow:unfollowThunkCreator,setCurrPage,setToggleBtn, getUsers:getUsersThunkCreator})(UsersContainer) //второй параметр сокращенная запись mapDispatchToProps
+export default connect(mapStateToProps,{follow:followThunkCreator,unfollow:unfollowThunkCreator,setCurrPage,setToggleBtn, getUsers:getUsersThunkCreator})(UsersContainer) //второй параметр сокращенная запись mapDispatchToProps
 //колбэк который вызовет криэйтор и задиспачит результат

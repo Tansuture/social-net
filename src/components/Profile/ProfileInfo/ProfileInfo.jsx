@@ -1,6 +1,8 @@
 import Loader from 'react-loader-spinner'
 import s from './ProfileInfo.module.css'
+import ProfileStatus from './ProfileStatus'
 const ProfileInfo = ({profile}) => {
+  
     if(!profile){
         return <Loader
             type="Puff"
@@ -10,12 +12,12 @@ const ProfileInfo = ({profile}) => {
              timeout={4000} />
     }
     return (
-        <div className="profile">
+        <div >
             <img
                 src="https://st.depositphotos.com/1760224/3660/i/600/depositphotos_36606389-stock-photo-sport-success-on-sunset-background.jpg"></img>
             <div className ={s.description}>
               <img src={profile.photos.large}/>
-                Tansuuuu
+                <ProfileStatus />
             </div>
         </div>
     )

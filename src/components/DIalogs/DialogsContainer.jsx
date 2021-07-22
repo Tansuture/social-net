@@ -1,7 +1,9 @@
 import {connect} from 'react-redux'
+
 import {sendMessageActionCreator, updateNewMessageTextActionCreator} from '../../state/dialogsReducer'
 
 import Dialogs from './Dialogs'
+
 
 let mapDispatchToProps = (dispatch) => {
     return {
@@ -13,12 +15,19 @@ let mapDispatchToProps = (dispatch) => {
         }
     }
 }
+
+
+
 let mapStateToProps=(state)=>{
+    
     return{
-        dialogsPage:state.dialogsPage
+        dialogsPage:state.dialogsPage,
+        isAuth:state.authMe.isAuth
     }
 }
 
-let DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs)
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
-export default DialogsContainer
+export default DialogsContainer;
+
+

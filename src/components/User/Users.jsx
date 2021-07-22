@@ -5,7 +5,7 @@ import Loader from 'react-loader-spinner'
 import { NavLink } from 'react-router-dom'
 
 
-const Users = ({users,isBtnToggled,setToggleBtn,follow,unfollow,postsPerPage,totalCount,currentPage,changePage,isLoading}) =>{
+const Users = ({users,isBtnToggled,follow,unfollow,postsPerPage,totalCount,currentPage,changePage,isLoading}) =>{
     let pageNumbers=[]
 
     for(let i=1;i<=Math.ceil(totalCount/postsPerPage);i++){

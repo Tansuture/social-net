@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api"
+
 const SET_USER_DATA="SET_USER_DATA"
 
 const initialState={
@@ -13,6 +15,18 @@ const authReducer = (state=initialState,action) =>{
             
                 return{ ...state,...action.data,isAuth:true}   
         default : return state
+    }
+}
+
+export const authThunkCreator=()=>{
+    return (dispatch)=>{
+        usersAPI.auth().then(data=>{
+            if(data.resultCode===0) {
+            const {id,login,email}=data.data
+              dispatch(setUserData({id,login,email}))
+                 }
+            })
+    
     }
 }
 

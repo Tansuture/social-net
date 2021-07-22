@@ -1,33 +1,45 @@
-import axios from 'axios';
+
 import React,{Component} from 'react'
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import {setUserProfile} from '../../state/profileReducer'
+import {userProfileThunkCreator} from '../../state/profileReducer'
 import { withRouter } from 'react-router-dom';
 
-class ProfileContainer extends Component {
+import {Redirect} from "react-router-dom";
 
+
+
+class ProfileContainer extends Component {
+    
+ 
 
     componentDidMount(){
       
-       
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.match.params.userId}`).then(response=>{
-            
-            this.props.setUserProfile(response.data)
-         
-        })
+       this.props.setUserProfile(this.props.match.params.userId)
+        
     }
   
     render() { 
+        if (!this.props.isAuth) return <Redirect to='/login' />
+      
+        
         return ( 
-            <Profile {...this.props}/>
+           
+            <Profile {...this.props} />
+            
          );
     }
 }
 
+
 const mapStateToProps = (state)=>({
-    profile:state.profilePage.profile
+    profile:state.profilePage.profile,
+    isAuth:state.authMe.isAuth
+   
 })
- 
+
 let WithRouterHOC=withRouter(ProfileContainer)
-export default connect(mapStateToProps,{setUserProfile})(WithRouterHOC)
+export default connect(mapStateToProps,{setUserProfile:userProfileThunkCreator})(WithRouterHOC)
+
+
+

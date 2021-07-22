@@ -16,10 +16,16 @@ auth(){
 },
 
 followBtn(userId){
-    return instance.post(`/follow/${userId}`).then(response=>response.data)
+    return instance.post(`follow/${userId}`).then(response=>response.data)
 },
  unfollowBtn(userId){
-    return instance.delete(`/follow/${userId}`).then(response=>response.data)
+    return instance.delete(`follow/${userId}`).then(response=>response.data)
+},
+setUserProfile(userId){
+    return instance.get(`profile/${userId}`).then(response=>response.data)
+},
+getStatus(userId){
+    return instance.get(`profile/status/${userId}`).then(response=>response.data)
 }
 
 
