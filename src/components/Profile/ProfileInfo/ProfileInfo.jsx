@@ -1,9 +1,10 @@
 import Loader from 'react-loader-spinner'
 import s from './ProfileInfo.module.css'
 import ProfileStatus from './ProfileStatus'
-const ProfileInfo = ({profile}) => {
+const ProfileInfo = (props) => {
+
   
-    if(!profile){
+    if(!props.profile){
         return <Loader
             type="Puff"
              color="#00BFFF"
@@ -16,8 +17,8 @@ const ProfileInfo = ({profile}) => {
             <img
                 src="https://st.depositphotos.com/1760224/3660/i/600/depositphotos_36606389-stock-photo-sport-success-on-sunset-background.jpg"></img>
             <div className ={s.description}>
-              <img src={profile.photos.large}/>
-                <ProfileStatus />
+              <img src={props.profile.photos.large}/>
+                <ProfileStatus updateUserStatus={props.updateUserStatus} status={props.status}/>
             </div>
         </div>
     )

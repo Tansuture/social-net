@@ -1,8 +1,13 @@
 import { usersAPI } from "../api/api"
 
+//action
 const ADD_POST = "ADD_POST"
 const UPDATE_NEW_POST = "UPDATE_NEW_POST"
 const SET_USER_PROFILE="SET_USER_PROFILE"
+const SET_USER_STATUS="SET_USER_STATUS"
+const UPDATE_USER_STATUS="UPDATE_USER_STATUS"
+
+
 let initialState = {
     postData: [
         {
@@ -16,7 +21,8 @@ let initialState = {
         }
     ],
     newPostText: "Tansu Hello",
-    profile:null
+    profile:null,
+    status:''
 }
 const profileReducer = (state = initialState, action) => {
 
@@ -41,6 +47,14 @@ const profileReducer = (state = initialState, action) => {
                 return{
                     ...state,profile:action.profile
                 }
+          case SET_USER_STATUS:
+                 return{
+                     ...state,status:action.status
+                }
+             case UPDATE_USER_STATUS:
+                return{
+                     ...state,status:action.status
+                 }
         default:
             return state
 
@@ -54,7 +68,23 @@ export const userProfileThunkCreator=(userId)=>{
     }
 }
 
+export const userStatusThunkCreator=(userId)=>{
+    return(dispatch)=>{
+        usersAPI.getStatus(userId).then(data=>dispatch(setUserStatus(data)))
+    }
+}
+
+
+export const updateStatusThunkCreator=(status)=>{
+    return(dispatch)=>{
+        usersAPI.updateStatus(status).then(data=>
+            dispatch(updateStatus(status)))
+            console.log(status)
+    }
+}
 export const addNewPostActionCreator = () => ({type: ADD_POST})
 export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST, newText: text})
 export const setUserProfile=(profile)=>({type:SET_USER_PROFILE,profile})
+export const setUserStatus=(status)=>({type:SET_USER_STATUS,status})
+export const updateStatus=(status)=>({type:UPDATE_USER_STATUS,status})
 export default profileReducer

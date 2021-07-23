@@ -16,7 +16,7 @@ import UsersContainer from './components/User/UsersContainer';
 
 
 
-const App=(props)=>{
+const App=()=>{
 
 return (
   <BrowserRouter>
