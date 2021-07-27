@@ -6,11 +6,16 @@ import { connect } from 'react-redux';
 
 
 class HeaderContainer extends Component {
+     
     componentDidMount(){
-        this.props.authMe()
+        
+     
+    this.props.authMe()
       
     }
     render() { 
+        console.log(this.props)
+        
         return ( 
              <>
              <Header {...this.props}/>

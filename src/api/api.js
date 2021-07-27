@@ -29,8 +29,12 @@ getStatus(userId){
 },
 updateStatus(status){
     return instance.put(`profile/status`,{status})
+},
+login(email,password,rememberMe){
+    return instance.put('auth/login',{email,password,rememberMe})
+},
+logout(){
+    return instance.delete('auth/login')
 }
-
-
 }
 

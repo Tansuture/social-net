@@ -1,0 +1,32 @@
+label{
+    display:flex;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+input[type='checkbox']{
+    margin-left: 10px;
+}
+button{
+    margin-left: 10px;
+}
+input[type='email'],
+input[type='password']
+{
+  display: block;
+  width: 400px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-left: 10px;
+
+}
+.required{
+    color: red;
+    font: normal 14px LatoRegular,Helvetica;
+    margin-left: 10px;
+}
