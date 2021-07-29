@@ -1,6 +1,7 @@
 import { ErrorMessage, Field, Form,Formik } from 'formik'
 import { connect } from 'react-redux'
-import { loginThunkCreator, logoutThunkCreator } from '../../state/authReducer'
+import { loginThunkCreator} from '../../state/authReducer'
+import {Redirect} from "react-router-dom";
 import s from './Login.module.css'
 import * as Yup from "yup"
 const initialValues={
@@ -16,15 +17,18 @@ const  validationSchema=Yup.object({
 })
 
 const Login = (props)=>{
-    
+  
 
     const onSubmit=(values)=>{
       
         props.login(values.email,values.password,values.rememberMe)
       
     }
-
+    if (props.isAuth) {
+        return <Redirect to={"/profile"} />
+    }
     return(
+
         <>
         <Formik initialValues={initialValues}
         onSubmit={onSubmit}
@@ -48,5 +52,7 @@ const Login = (props)=>{
     )
 }
 
-
-export default connect(null,{login:loginThunkCreator,logout:logoutThunkCreator})(Login)
+const mapStateToProps=(state)=>({
+    isAuth:state.authMe.isAuth
+})
+export default connect(mapStateToProps,{login:loginThunkCreator})(Login)

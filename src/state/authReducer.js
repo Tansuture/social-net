@@ -1,51 +1,62 @@
-import { usersAPI } from "../api/api"
 
-const SET_USER_DATA="SET_USER_DATA"
+import {usersAPI} from '../api/api'
 
-const initialState={
-    id: null,
+const SET_USER_DATA = 'SET_USER_DATA';
+
+
+let initialState = {
+    userId: null,
     email: null,
     login: null,
-    isAuth:false
-}
-const authReducer = (state=initialState,action) =>{
-    
-    switch(action.type){
+    isAuth: false
+};
+
+const authReducer = (state = initialState, action) => {
+    switch (action.type) {
+ 
         case SET_USER_DATA:
-           
-                return{ ...state,...action.data,isAuth:true}   
-        default : return state
+         
+            return {
+                ...state,
+                ...action.payload
+            }
+
+        default:
+            return state;
     }
 }
 
-export const authThunkCreator=()=>{
-    debugger
-    return (dispatch)=>{
-        usersAPI.auth().then(data=>{
-            if(data.resultCode===0) {
-            const {id,login,email}=data.data
-              dispatch(setUserData(id,login,email,true))
-                 }
-            })
-    
-    }
+
+export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, payload:
+        {userId, email, login, isAuth}  });
+
+export const authThunkCreator = () => (dispatch) => {
+    usersAPI.auth()
+        .then(data => {
+            if (data.resultCode === 0) {
+                let {id, login, email} = data.data;
+                dispatch(setAuthUserData(id, email, login, true));
+            }
+        });
 }
 
-export const loginThunkCreator=(email,password,rememberMe)=>{
-    return (dispatch)=>{
-     
-        usersAPI.login(email,password,rememberMe).then(data=>{
-            dispatch(authThunkCreator())
-        })
-    }
+export const loginThunkCreator = (email, password, rememberMe) => (dispatch) => {
+    usersAPI.login(email, password, rememberMe)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(authThunkCreator())
+            }
+        });
 }
 
-export const logoutThunkCreator=()=>{
-    return (dispatch)=>{
-        usersAPI.logout.then(data=>{
-            dispatch(setUserData(null,null,null,false))
-        })
-    }
+export const logoutThunkCreator=()=>(dispatch)=>{
+ 
+    usersAPI.logout().then(data => {
+        if (data.resultCode === 0) {
+            dispatch(setAuthUserData(null, null, null, false));
+        }
+    });
 }
-export const setUserData =({id,login,email,isAuth})=>({type:SET_USER_DATA,data:{id,login,email,isAuth}})//id,email,login
+
+
 export default authReducer 
