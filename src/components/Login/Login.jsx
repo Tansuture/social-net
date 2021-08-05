@@ -16,15 +16,15 @@ const  validationSchema=Yup.object({
     rememberMe:Yup.string().required('Required')
 })
 
-const Login = (props)=>{
+const Login = ({login,isAuth})=>{
   
 
     const onSubmit=(values)=>{
       
-        props.login(values.email,values.password,values.rememberMe)
+        login(values.email,values.password,values.rememberMe)
       
     }
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to={"/profile"} />
     }
     return(

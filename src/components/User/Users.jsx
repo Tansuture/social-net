@@ -1,17 +1,12 @@
 
-import s from './Users.module.css'
-import user from './assets/User.png'
 import Loader from 'react-loader-spinner'
-import { NavLink } from 'react-router-dom'
+
+import Pagination from './Pagination'
+import User from './PersonalUser'
 
 
 const Users = ({users,isBtnToggled,follow,unfollow,postsPerPage,totalCount,currentPage,changePage,isLoading}) =>{
-    let pageNumbers=[]
-
-    for(let i=1;i<=Math.ceil(totalCount/postsPerPage);i++){
-        pageNumbers.push(i)
-    }
- 
+   
     return(
         <>
         {isLoading ? (
@@ -24,32 +19,9 @@ const Users = ({users,isBtnToggled,follow,unfollow,postsPerPage,totalCount,curre
            />
         ):(
         <div>
-    {users.map(u=><div> 
-        <div className={s.user_block}>
-           <NavLink to={`/profile/${u.id}`}> <img src={u.photos.small !=null ? u.photos.small:user } className={s.img}/></NavLink>
-            <div className={s.info}>
-                <p>{u.name}</p>
-                <p>{'u.location.city'},{'u.location.country'}</p>
-                <p>{u.status}</p>
-             </div>
-            <div className={s.btn_container}>
-                { u.followed ? <button disabled={isBtnToggled.some(id=>id===u.id)}className={s.btn}
-                 onClick={()=>{unfollow(u.id)}}>Unfollow</button> :
-                 <button  disabled={isBtnToggled.some(id=>id===u.id)} className={s.btn}
-                  onClick={()=>{follow(u.id)}}>follow</button>}
-            </div>   
-         </div>
-    </div>
-   )}
-   <ul className={s.pagination}>
-   {
-       pageNumbers.map(number=>(
-        <li >
-        <a onClick={()=>{changePage(number)}} className={currentPage===number && s.active}>{number}</a>
-        </li>
-       ))
-      }
-     </ul>
+    {users.map(u=><User key={u.id} user={u}isBtnToggled={isBtnToggled}follow={follow}unfollow={unfollow} /> )}
+  
+    <Pagination totalCount={totalCount} postsPerPage={postsPerPage} changePage={changePage} currentPage={currentPage}/>
 </div>
 
 )}

@@ -19,29 +19,33 @@ const initialState = {
 
 //thunkcreator для асинхронных операциий
 export const getUsersThunkCreator =(currentPage,postsPerPage)=>{
-    return (dispatch)=>{
+    return  async (dispatch)=>{
         dispatch(setLoading(true))
         dispatch(setCurrPage(currentPage))
-        usersAPI.getUsers(currentPage,postsPerPage).then(data=>{
+        let data = await usersAPI.getUsers(currentPage,postsPerPage)
             dispatch(setUsers(data.items))
             dispatch(setTotalCount(data.totalCount))
             dispatch(setLoading(false))
-          })
+         
     }
 }
+
+export const followUnfollow = async (userId,actionC,apiMethod,dispatch)=>{
+dispatch(setToggleBtn(true,userId))   
+await apiMethod(userId)
+dispatch(actionC(userId))
+dispatch(setToggleBtn(false,userId))
+
+}
 export const unfollowThunkCreator = (userId)=>{
-    return (dispatch)=>{
+    return async (dispatch)=>{
+        followUnfollow(userId,unfollow,usersAPI.unfollowBtn.bind(usersAPI),dispatch)
         
-            dispatch(setToggleBtn(true,userId))
-            usersAPI.unfollowBtn(userId).then(data=>dispatch(unfollow(userId)))
-            dispatch(setToggleBtn(false,userId))
     }
 }
 export const followThunkCreator = (userId)=>{
-    return (dispatch)=>{
-            dispatch(setToggleBtn(true,userId))
-            usersAPI.followBtn(userId).then(data=>dispatch(follow(userId)))
-            dispatch(setToggleBtn(false,userId))
+    return async (dispatch)=>{
+        followUnfollow(userId,follow,usersAPI.followBtn.bind(usersAPI),dispatch)
     }
 }
 

@@ -2,7 +2,7 @@ import {Component} from 'react'
 import { connect } from "react-redux"
 import {  getUsersThunkCreator, unfollowThunkCreator,followThunkCreator,setCurrPage,setToggleBtn} from "../../state/usersReducer"
 import Users from "./Users"
-
+import {Redirect} from "react-router-dom";
 
 
 
@@ -18,6 +18,8 @@ class UsersContainer extends Component {
     this.props.getUsers(pageNum,this.props.postsPerPage)
     }
         render(){
+            if (!this.props.isAuth) return <Redirect to='/login' />
+      
          
             const {users,follow,unfollow,totalCount,postsPerPage,setToggleBtn,isBtnToggled,currentPage,isLoading}=this.props
          
@@ -47,7 +49,8 @@ const mapStateToProps=(state)=>{
         totalCount:state.usersPage.totalCount,
         currentPage:state.usersPage.currentPage,
         isLoading:state.usersPage.isLoading,
-        isBtnToggled:state.usersPage.isBtnToggled
+        isBtnToggled:state.usersPage.isBtnToggled,
+        isAuth:state.authMe.isAuth
     }
 }
 

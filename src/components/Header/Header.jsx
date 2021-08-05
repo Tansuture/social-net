@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { NavLink,Link } from 'react-router-dom'
 import s from './Header.module.css'
-import Logout from './LogoutDropDown';
 
 const Header = (props) => {
 

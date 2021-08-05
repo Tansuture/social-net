@@ -4,12 +4,16 @@ import { useEffect } from "react"
 
 
 
+
 const ProfileStatus=(props)=>{
+
+    useEffect(()=>{
+        setStatus(props.status)
+    },[props.status])
 
     const [editMode,setEditMode]=useState(false)
     const [valueStatus,setStatus]=useState(props.status) //initial state
 
-    
      const udpateStatus=(e)=>{
          setStatus(e.target.value) //value from input
          props.updateUserStatus(valueStatus) //set input-value to the thunkcreator

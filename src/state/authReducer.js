@@ -30,32 +30,32 @@ const authReducer = (state = initialState, action) => {
 export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, payload:
         {userId, email, login, isAuth}  });
 
-export const authThunkCreator = () => (dispatch) => {
-    usersAPI.auth()
-        .then(data => {
+export const authThunkCreator = () =>  async(dispatch) => {
+    let data = await usersAPI.auth()
+        
             if (data.resultCode === 0) {
                 let {id, login, email} = data.data;
                 dispatch(setAuthUserData(id, email, login, true));
             }
-        });
+        
 }
 
-export const loginThunkCreator = (email, password, rememberMe) => (dispatch) => {
-    usersAPI.login(email, password, rememberMe)
-        .then(data => {
+export const loginThunkCreator = (email, password, rememberMe) => async (dispatch) => {
+let data = await usersAPI.login(email, password, rememberMe)
+      
             if (data.resultCode === 0) {
                 dispatch(authThunkCreator())
             }
-        });
+      
 }
 
-export const logoutThunkCreator=()=>(dispatch)=>{
- 
-    usersAPI.logout().then(data => {
+export const logoutThunkCreator=()=> async (dispatch)=>{
+   
+    let data = await usersAPI.logout()
         if (data.resultCode === 0) {
             dispatch(setAuthUserData(null, null, null, false));
         }
-    });
+  
 }
 
 

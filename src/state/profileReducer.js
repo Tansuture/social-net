@@ -62,24 +62,26 @@ const profileReducer = (state = initialState, action) => {
 
 }
 export const userProfileThunkCreator=(userId)=>{
-    return(dispatch)=>{
+    return async(dispatch)=>{
        
-        usersAPI.setUserProfile(userId).then(data=>dispatch(setUserProfile(data)))
+        let data = await usersAPI.setUserProfile(userId)
+        dispatch(setUserProfile(data))
     }
 }
 
 export const userStatusThunkCreator=(userId)=>{
-    return(dispatch)=>{
-        usersAPI.getStatus(userId).then(data=>dispatch(setUserStatus(data)))
+    return async(dispatch)=>{
+       let data = await usersAPI.getStatus(userId)
+       dispatch(setUserStatus(data))
     }
 }
 
 
 export const updateStatusThunkCreator=(status)=>{
-    return(dispatch)=>{
-        usersAPI.updateStatus(status).then(data=>
-            dispatch(updateStatus(status)))
-            console.log(status)
+    return async (dispatch)=>{
+      await usersAPI.updateStatus(status)
+            dispatch(updateStatus(status))
+            
     }
 }
 export const addNewPostActionCreator = () => ({type: ADD_POST})

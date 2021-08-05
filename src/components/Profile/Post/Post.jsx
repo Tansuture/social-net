@@ -5,7 +5,8 @@ import React from 'react'
 
 const Post=(props)=>{
 
-    let postElements = props.postData.map(p => <MyPosts message={p.message} LikesCount ={p.LikesCount}/>)
+    console.log('RENDER')
+    let postElements = props.postData.map(p => <MyPosts key={p.id} message={p.message} LikesCount ={p.LikesCount}/>)
 
 
     let onAddPost=()=>{
